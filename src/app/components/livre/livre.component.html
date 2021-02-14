@@ -1,0 +1,56 @@
+<mat-toolbar>
+    <span>{{service.form.controls['$key'].value?"Modifier un livre":"Nouveau livre"}}</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close ml-auto" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+  </mat-toolbar>
+  <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+    <mat-grid-list cols="2" rowHeight="300px">
+      <mat-grid-tile>
+        <div class="controles-container">
+          <input type="hidden" formControlName="$key">
+          <mat-form-field>
+            <input formControlName="titre" matInput placeholder="Titre*" >
+            <mat-error>Le titre est obligatoire.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="auteur" matInput placeholder="Auteur*" >
+            <mat-error>Le nom de l'auteur est obligatoire.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="isbn" matInput placeholder="Isbn*" >
+            <mat-error>L'isbn est obligatoire.</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+          <input type="hidden" value="test" name="test">
+          <mat-form-field>
+            <input formControlName="nbExemplaires" type="number" matInput placeholder="Total Exemplaires*" >
+            <mat-error>Le nombre d'exemplaire est obligatoire.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="datePublication" [matDatepicker]="myDatepicker" matInput placeholder="Date publication*" >
+            <mat-datepicker-toggle matSuffix [for] = "myDatepicker" placeholder="mm/dd/yyyy">
+            </mat-datepicker-toggle><mat-datepicker #myDatepicker></mat-datepicker>
+            <mat-error>Le date est obligatoire.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="categorie" placeholder="Categorie" >
+              <ng-container >
+                <mat-option value="C">Cuisine</mat-option>
+                <mat-option value="I">Informatique</mat-option>
+                <mat-option value="J">Jeunesse</mat-option>
+                <mat-option value="M">Mathématiques</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <div class="button-row">
+            <button mat-raised-button color="primary" class="mr-2" type="submit" [disabled]="service.form.invalid">Envoyer</button>
+            <button mat-raised-button color="warn" (click)="onClear()">Effacer</button>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+ 
