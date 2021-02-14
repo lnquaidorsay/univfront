@@ -8,13 +8,15 @@ import { AfterAuthGuard } from './guards/after-auth.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { PageNotFoundComponent } from './components/partials/page-not-found/page-not-found.component';
 import { LoginComponent } from './components/login/login.component';
+import { PretComponent } from './components/pret/pret.component';
+import { EtudiantComponent } from './components/etudiant/etudiant.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/livres", pathMatch: "full", canActivate: [AuthGuard] },
   { path: "livres", children: [
      { path:"", component: ListLivreComponent },
-     { path:"create", component: AjoutLivreComponent},
-     { path:"edit/:id", component: ModifierLivreComponent },
+     { path:"pret", component: PretComponent},
+     { path:"etudiant", component: EtudiantComponent },
     ], canActivate: [AuthGuard]
   },
   { path: "login", component: LoginComponent, canActivate: [AfterAuthGuard] },
