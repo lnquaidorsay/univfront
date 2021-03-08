@@ -8,6 +8,7 @@ export class TokenService {
   constructor() { }
 
   set(data: any) {
+    console.log("data incoming backend :",data);
     localStorage.setItem('token', data.token);
     localStorage.setItem('id', data.id);
     localStorage.setItem('nom', data.nom);

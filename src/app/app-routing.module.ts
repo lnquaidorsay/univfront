@@ -14,9 +14,9 @@ import { EtudiantComponent } from './components/etudiant/etudiant.component';
 const routes: Routes = [
   { path: "", redirectTo: "/livres", pathMatch: "full", canActivate: [AuthGuard] },
   { path: "livres", children: [
-     { path:"", component: ListLivreComponent },
-     { path:"pret", component: PretComponent},
-     { path:"etudiant", component: EtudiantComponent },
+     { path:"", component: ListLivreComponent },// http://localhost:4200/livres
+     { path:"pret", component: PretComponent}, // http://localhost:4200/livres/prêt
+     { path:"etudiant", component: EtudiantComponent }, // // http://localhost:4200/livres/etudiant
     ], canActivate: [AuthGuard]
   },
   { path: "login", component: LoginComponent, canActivate: [AfterAuthGuard] },
