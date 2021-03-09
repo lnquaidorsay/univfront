@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
     const objJWT = jwtHelper.decodeToken(data.token);
     console.log('objJWT ',objJWT);
     this.roles = objJWT.roles; //Recupère les roles
-    this.username = objJWT.username; //Recupère le username
+    this.username = objJWT.name; //Recupère le username
     console.log('roles :  ',this.roles);
     console.log('username :  ',this.username);
     this.account.changeAuthStatus(true);
