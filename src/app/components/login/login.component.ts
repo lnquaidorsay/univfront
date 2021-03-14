@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     });
     console.log("error email : ",this.loginForm.get('email'));
     console.log("error password : ",this.loginForm.get('password'));
+    this.login();
   }
 
   get inputRequired() { return this.loginForm.controls; }
@@ -48,20 +49,48 @@ export class LoginComponent implements OnInit {
     )
   }
 
+  handleResponseBis(data:any) {
+    let tokenData = {
+      token: data.token,
+      id: data.id,
+      nom: data.nom
+    };
+
+    localStorage.setItem('tokenData', JSON.stringify(tokenData));
+    var myObj = null;
+    if(localStorage.getItem('tokenData') != null) {
+      myObj = JSON.parse(localStorage.getItem('tokenData'));
+      localStorage.setItem('token',myObj.token);
+      localStorage.setItem('id',myObj.id);
+      localStorage.setItem('nom',myObj.nom);
+    }
+    this.account.changeAuthStatus(true);
+    this.toastr.success(
+      `Bienvenu : ${ this.token.getInfos().name }`,
+      'Vous êtes connectés !',
+      {
+        timeOut: 3000,
+        positionClass: 'toast-bottom-left'
+      }
+    );
+    this.router.navigateByUrl('/');
+    //this.router.navigateByUrl('/livres'); 
+}
 
   
   handleResponse(data:any) {
     this.token.handle(data);
-    const jwtHelper = new JwtHelperService(); //Decode le jwt
-    const objJWT = jwtHelper.decodeToken(data.token);
-    console.log('objJWT ',objJWT);
-    this.roles = objJWT.roles; //Recupère les roles
-    this.username = objJWT.name; //Recupère le username
-    console.log('roles :  ',this.roles);
-    console.log('username :  ',this.username);
     this.account.changeAuthStatus(true);
-    console.log("handle data in login component : ",data);
-    this.router.navigateByUrl('/livres'); //rediriger un utilisateur vers une route determiné
+    this.toastr.success(
+      `Bienvenu : ${ this.token.getInfos().name }`,
+      'Vous êtes connectés !',
+      {
+        timeOut: 3000,
+        positionClass: 'toast-bottom-left'
+      }
+    );
+    this.router.navigateByUrl('/');
+  
   }
 
 

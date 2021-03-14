@@ -18,9 +18,11 @@ export class AfterAuthGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
 
       if(this.tokenService.loggedIn()) {
+        console.log("$$$$$$this.tokenService.loggedIn()$$$$$$$$$$ : ",this.tokenService.loggedIn())
         this.router.navigateByUrl('/');
         return false;
      }
+     console.log("**********not this.tokenService.loggedIn() : ********************");
      console.warn('ok')
      return true;
   }

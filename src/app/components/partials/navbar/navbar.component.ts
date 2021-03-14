@@ -24,19 +24,20 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.account.authStatus.subscribe(value => {
-      this.loggedIn = value
+      this.loggedIn = value;
       this.userInfos = this.token.getInfos();
       this.currentUser = this.token.getInfos();
-      console.log("Current user in navbar : ",this.currentUser);
-      console.log("userInfos user in navbar : ",this.userInfos);
     });
   }
 
   logout() {
     this.token.remove();
+    //this.account.changeAuthStatus(true);
+    this.loggedIn = false;
+    //localStorage.clear();
     this.toastr.info(
         `Déconnexion`,
-        'Vous êtes déconnecter !',
+        'Vous êtes déconnecté !',
         {
           timeOut: 7000,
           positionClass: 'toast-bottom-left'
